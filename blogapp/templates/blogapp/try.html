@@ -1,0 +1,176 @@
+{% extends 'blogapp/base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+    <div class="site-section py-0">
+      <div class="owl-carousel hero-slide owl-style">
+
+        <div class="site-section">
+          <div class="container">
+            <div class="half-post-entry d-block d-lg-flex bg-light">
+              <div class="img-bg" style="background-image: url('media/{{max_view_post.image}}')"></div>
+              <div class="contents">
+                <span class="caption">Trending Post</span>
+                <h2><a href="/fullpost/{{max_view_post.id}}">{{max_view_post.title}}</a></h2>
+               
+                <p class="mb-3"> {{max_view_post.description|slice:":300"| safe}}<span> ...... </span></p>
+                
+                <a href="/fullpost/{{max_view_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{max_view_post.author}}</a> in <a href="#">{{max_view_post.category}}</a></span>
+                  <span class="date-read">{{max_view_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{max_view_post.views}}  </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="site-section">
+          <div class="container">
+            <div class="half-post-entry d-block d-lg-flex bg-light">
+              <div class="img-bg" style="background-image: url('media/{{latest_post.image}}')"></div>
+              <div class="contents">
+                <span class="caption">Most Recent Post</span>
+                <h2><a href="blog-single.html">{{latest_post.title}}</a></h2>
+                <p class="mb-3"> {{latest_post.description|slice:":300"| safe}}.....</p>
+                <a href="/fullpost/{{latest_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{latest_post.author}}</a> in <a href="#">{{latest_post.category}}</a></span>
+                  <span class="date-read">{{latest_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{latest_post.views}}  </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+            <div class="section-title">
+              <h2>Recent Posts</h2>
+            </div>
+            {% for recent_post in recent_posts %}
+            <div class="post-entry-2 d-flex">
+              <div class="thumbnail" style="background-image: url('media/{{recent_post.image}}')"></div>
+              <div class="contents">
+                <h2><a href="/fullpost/{{recent_post.id}}">{{recent_post.title}}</a></h2>
+                <p class="mb-3">{{recent_post.description|slice:":100"| safe}}.....</p>
+                <a href="/fullpost/{{latest_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{recent_post.author}}</a></span>
+                  <span class="date-read">{{recent_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{recent_post.views}}  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          
+          <div class="col-lg-3">
+            <div class="section-title">
+              <h2>Popular Posts</h2>
+            </div>
+            {% for popular_post in popular_posts %}
+            <div class="trend-entry d-flex">
+              <div class="number align-self-start">{{forloop.counter}}</div>
+              <div class="trend-contents">
+                <h2><a href="/fullpost/{{popular_post.id}}">{{popular_post.title}}</a></h2>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{popular_post.author}}</a> in <a href="#">{{popular_post.category}}</a></span>
+                  <span class="date-read">{{popular_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{popular_post.views}}  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            <p>
+              <a href="{% url 'trendingpost' %}" class="more">See All Trending <span class="icon-keyboard_arrow_right"></span></a>
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <nav aria-label="...">
+              <ul class="pagination">
+                <li class="page-item {% if not prev_page_url %}disabled {% endif %}">
+                  <a class="page-link" href="{{prev_page_url}}" tabindex="-1">Previous</a>
+                </li>
+                
+                {% for page_num in page.paginator.page_range %}
+                {% if page.number == page_num %}
+                <li class="page-item active">
+                  <a class="page-link" href="/?page={{page_num}}">{{page_num}} <span class="sr-only">(current)</span></a>
+                </li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="/?page={{page_num}}">{{page_num}}</a></li>
+                {% endif %}
+                {% endfor %}
+                <li class="page-item {% if not next_page_url %}disabled {% endif %}">
+                  <a class="page-link" href="{{next_page_url}}">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="section-title">
+              <h2>Entertainment</h2>
+            </div>
+            {% for entertainment_post in entertainment_posts %}
+            <div class="post-entry-2 d-flex">
+              <div class="thumbnail" style="background-image: url('media/{{entertainment_post.image}}')"></div>
+              <div class="contents">
+                <h2><a href="/fullpost/{{entertainment_post.id}}">{{entertainment_post.title}}</a></h2>
+                <p class="mb-3">{{entertainment_post.description|slice:":50"| safe}}.....</p>
+                <a href="/fullpost/{{entertainment_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{entertainment_post.author}}</a></span>
+                  <span class="date-read">{{entertainment_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{entertainment_post.views}}  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="col-lg-6">
+            <div class="section-title">
+              <h2>Sports</h2>
+            </div>
+            {% for sports_post in sports_posts %}
+            <div class="post-entry-2 d-flex">
+              <div class="thumbnail" style="background-image: url('media/{{sports_post.image}}')"></div>
+              <div class="contents">
+                <h2><a href="/fullpost/{{sports_post.id}}">{{sports_post.title}}</a></h2>
+                <p class="mb-3">{{sports_post.description|slice:":50"| safe}}......</p>
+                <a href="/fullpost/{{sports_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{sports_post.author}}</a></span>
+                  <span class="date-read">{{sports_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{sports_post.views}}  </span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

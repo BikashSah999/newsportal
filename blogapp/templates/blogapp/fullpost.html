@@ -1,0 +1,102 @@
+{% extends 'blogapp/base.html' %}
+{% block title %} {{full_post.title}} {% endblock %}
+{% block navbar %}
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><img src='{% static 'blogapp/images/logo.png' %}'></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"><span class="fas fa-home"></span>&nbsp;Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fas fa-th-list"></span>&nbsp;Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+          <a class="dropdown-item" href="{% url 'entertainment' %}">Entertainment</a>
+          <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+          <a class="dropdown-item" href="{% url 'sports' %}">Sports</a>
+          <a class="dropdown-item" href="{% url 'news' %}">News</a>
+          <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}"><span class="fas fa-circle"></span>&nbsp;About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}"><span class="fas fa-envelope"></span>&nbsp;Contact</a>
+      </li>
+    </ul>
+    <form method="GET" action="/searchpost/" class="search-form d-inline-block">
+      <div class="d-flex">
+        <input type="text" class="form-control" placeholder="Search..." name='query'>
+        <button type="submit" class="btn btn-secondary" ><span class="icon-search"></span></button>
+      </div>
+    </form>
+  </div>
+</nav>
+{% endblock %}
+{% block body %}    
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 single-content">
+            
+            <p class="mb-5">
+              <img src="/media/{{full_post.image}}" alt="Image" class="img-fluid">
+            </p>  
+            <h1 class="mb-4">
+              {{full_post.title}}
+            </h1>
+            <div class="post-meta d-flex mb-5">
+              <div class="vcard">
+                <span class="d-block">{{full_post.author}} in <a href="/{{full_post.categorylist|lower}}">{{full_post.categorylist}}</a></span>
+                <span class="date-read">{{full_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                <span class="d-block"> Views: {{full_post.views}}  </span>
+              </div>
+            </div>
+
+            <p> {{full_post.description| safe}} </p>
+
+            <div class="fb-like" data-href="https://anykhabar.com/fullpost/{{full_post.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+            <div class="pt-5">
+                    <p>Categories:  <a href="#">Design</a>, <a href="#">Events</a>  Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
+                  </div>
+          </div>
+
+
+          <div class="col-lg-3 ml-auto">
+            <div class="section-title">
+              <h2>Popular Posts</h2>
+            </div>
+            {% for popular_post in popular_posts %}
+            <div class="trend-entry d-flex">
+              <div class="number align-self-start">{{forloop.counter}}</div>
+              <div class="trend-contents">
+                <h2><a href="/fullpost/{{popular_post.id}}">{{popular_post.title}}</a></h2>
+                <div class="post-meta">
+                  <span class="d-block">{{popular_post.author}} in <a href="/{{popular_post.categorylist|lower}}">{{popular_post.categorylist}}</a></span>
+                  <span class="date-read">{{popular_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+            <p>
+              <a href="{% url 'trendingpost' %}" class="more">See All Popular <span class="icon-keyboard_arrow_right"></span></a>
+            </p>
+          </div>
+
+
+        </div>
+        
+      </div>
+    </div>
+
+{% endblock %}    

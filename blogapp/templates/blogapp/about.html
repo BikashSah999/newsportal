@@ -1,0 +1,75 @@
+{% extends 'blogapp/base.html' %}
+{% block title %} About {% endblock %}
+{% block navbar %}
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><img src='{% static 'blogapp/images/logo.png' %}'></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"><span class="fas fa-home"></span>&nbsp;Home </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fas fa-th-list"></span>&nbsp;Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+          <a class="dropdown-item" href="{% url 'entertainment' %}">Entertainment</a>
+          <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+          <a class="dropdown-item" href="{% url 'sports' %}">Sports</a>
+          <a class="dropdown-item" href="{% url 'news' %}">News</a>
+          <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}"><span class="fas fa-circle"></span>&nbsp;About<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}"><span class="fas fa-envelope"></span>&nbsp;Contact</a>
+      </li>
+    </ul>
+    <form method="GET" action="/searchpost/" class="search-form d-inline-block">
+      <div class="d-flex">
+        <input type="text" class="form-control" placeholder="Search..." name='query'>
+        <button type="submit" class="btn btn-secondary" ><span class="icon-search"></span></button>
+      </div>
+    </form>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+    
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-left">
+            <div class="section-title mb-5">
+              <h2>About Us</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <p>
+              {% load static %}
+              <img src="/media/{{about_sec.image}}" alt="Image" class="img-fluid">
+            </p>
+          </div>
+          <div class="col-lg-6 pl-md-5">
+            <p>{{about_sec.about_title}}</p>
+            <ul class="ul-check list-unstyled success mt-5">
+              <li>Lorem ipsum dolor sit.</li>
+              <li>Cupiditate dolores rerum, consequatur!</li>
+              <li>Quia dolor molestias voluptatem?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

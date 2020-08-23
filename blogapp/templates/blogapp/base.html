@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <title>{% block title %} {% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% load static %}
+  <link rel="shortcut icon" href="{% static 'blogapp/images/favicon(2).ico' %}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=B612+Mono|Cabin:400,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'blogapp/fonts/icomoon/style.css' %}">
+
+  <link rel="stylesheet" href="{% static 'blogapp/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/css/owl.theme.default.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'blogapp/css/jquery.fancybox.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'blogapp/css/bootstrap-datepicker.css' %}">
+
+  <link rel="stylesheet" href="{% static 'blogapp/fonts/flaticon/font/flaticon.css' %}">
+
+  <link rel="stylesheet" href="{% static 'blogapp/css/aos.css' %}">
+  <link href="{% static 'blogapp/css/jquery.mb.YTPlayer.min.css' %}" media="all" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="{% static 'blogapp/css/style.css' %}">
+
+
+
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="CTDA8kaP"></script>
+
+    <div class="site-wrap">
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+  
+      {% block navbar %}
+      {% endblock %}
+      
+      {% if messages %}
+      {% for message in messages %}
+      <h6> {{ message }} </h6>
+      {% endfor %}
+      {% endif %}
+
+    {% block body %} {% endblock %} 
+    
+    <div class="site-section subscribe bg-light">
+      <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+            <h2>About Us</h2>
+            <p>We always aim to provide quality and true news to all the People.</p>
+          <hr>
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-4">
+              
+                  <h4><span class="fas fa-map-marker"></span> &nbsp; &nbsp;Balkumari, Lalitpur</h4><hr>
+                  <h4><span class="fas fa-mobile-alt"></span>&nbsp; &nbsp;+9779823457285</h4><hr>
+                  <h4><span class="fas fa-envelope"></span>&nbsp; &nbsp;anykhabar78@gmail.com</h4><hr>
+              
+          </div>
+          </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="copyright">
+                <p style="text-align:center;">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | <a href="{% url 'home' %}"> <img src="{% static 'blogapp/images/logo-icon-footer.png'%}"> </a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+  <!-- .site-wrap -->
+
+
+  <!-- loader -->
+  <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#ff5e15"/></svg></div>
+
+  <script src="{% static 'blogapp/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'blogapp/js/popper.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'blogapp/js/aos.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.sticky.js' %}"></script>
+  <script src="{% static 'blogapp/js/jquery.mb.YTPlayer.min.js' %}"></script>
+
+
+
+
+  <script src="{% static 'blogapp/js/main.js' %}"></script>
+
+</body>
+
+</html>

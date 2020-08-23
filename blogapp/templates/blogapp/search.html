@@ -1,0 +1,77 @@
+{% extends 'blogapp/base.html' %}
+{% block title %} Search Posts {% endblock %}
+{% block navbar %}
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><img src='{% static 'blogapp/images/logo.png' %}'></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}"><span class="fas fa-home"></span>&nbsp;Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="fas fa-th-list"></span>&nbsp;Category
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'technology' %}">Technology</a>
+          <a class="dropdown-item" href="{% url 'entertainment' %}">Entertainment</a>
+          <a class="dropdown-item" href="{% url 'politics' %}">Politics</a>
+          <a class="dropdown-item" href="{% url 'sports' %}">Sports</a>
+          <a class="dropdown-item" href="{% url 'news' %}">News</a>
+          <a class="dropdown-item" href="{% url 'blog' %}">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'about' %}"><span class="fas fa-circle"></span>&nbsp;About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'contact' %}"><span class="fas fa-envelope"></span>&nbsp;Contact</a>
+      </li>
+    </ul>
+    <form method="GET" action="/searchpost/" class="search-form d-inline-block">
+      <div class="d-flex">
+        <input type="text" class="form-control" placeholder="Search..." name='query'>
+        <button type="submit" class="btn btn-secondary" ><span class="icon-search"></span></button>
+      </div>
+    </form>
+  </div>
+</nav>
+{% endblock %}
+{% block body %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="site-section py-0">
+    <h1>{{message}}</h1>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="site-section py-0">
+        {% for search_post in search_posts %}
+        <div class="site-section">
+          <div class="container">
+            <div class="half-post-entry d-block d-lg-flex bg-light">
+              <div class="img-bg" style="background-image: url('/media/{{search_post.image}}')"></div>
+              <div class="contents">
+                <h2><a href="/fullpost/{{search_post.id}}">{{search_post.title}}</a></h2>
+               
+                <p class="mb-3"> {{search_post.description|slice:":300"| safe}}<span> ...... </span></p>
+                
+                <a href="/fullpost/{{search_post.id}}">(Continue Reading)</a>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{search_post.author}}</a> in <a href="/{{search_post.categorylist|lower}}">{{search_post.categorylist}}</a></span>
+                  <span class="date-read">{{search_post.date}} <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  <span class="d-block"> Views: {{search_post.views}}  </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}
